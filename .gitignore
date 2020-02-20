@@ -1,9 +1,6 @@
 # Directories to ignore #
 .idea
-js/lib
-
-# File to include #
-!js/lib/README.md
+js/lib/*.js
 
 # Files to ignore #
 *.iml
