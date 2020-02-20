@@ -4,6 +4,7 @@ staticChart();
 downloadSvg();
 annotations3d();
 basicTimeSeries();
+uahTempTimeSeries();
 
 /* Current Plotly.js version */
 console.log( Plotly.BUILD );
@@ -183,7 +184,9 @@ function basicTimeSeries() {
 }
 
 function uahTempTimeSeries() {
-    Plotly.d3.dsv(" ", "data/uah-monthly.txt", function(err, rows){
+    Plotly.d3.csv("http://localhost:8888/data/uah-monthly.csv", function(err, rows){
+    // Plotly.d3.dsv(" ", "http://localhost:8888/data/uah-monthly-date.txt", function(err, rows){
+    // Plotly.d3.dsv("|", "http://localhost:8888/data/uah-monthly-date-delim.txt", function(err, rows){
 
         function unpack(rows, key) {
             return rows.map(function(row) { return row[key]; });
@@ -193,18 +196,18 @@ function uahTempTimeSeries() {
         var trace1 = {
             type: "scatter",
             mode: "lines",
-            name: 'AAPL High',
+            name: 'Global Avg Temp',
             x: unpack(rows, 'Date'),
-            y: unpack(rows, 'AAPL.High'),
+            y: unpack(rows, 'Globe'),
             line: {color: '#17BECF'}
         }
 
         // var trace2 = {
         //     type: "scatter",
         //     mode: "lines",
-        //     name: 'AAPL Low',
+        //     name: 'NH Avg Temp',
         //     x: unpack(rows, 'Date'),
-        //     y: unpack(rows, 'AAPL.Low'),
+        //     y: unpack(rows, 'NH'),
         //     line: {color: '#7F7F7F'}
         // }
         //
