@@ -203,18 +203,28 @@ function uahTempTimeSeries() {
             line: {color: '#17BECF'}
         };
 
-        // var trace2 = {
-        //     type: "scatter",
-        //     mode: "lines",
-        //     name: 'NH Avg Temp',
-        //     x: unpack(rows, 'Date'),
-        //     y: unpack(rows, 'NH'),
-        //     line: {color: '#7F7F7F'}
-        // }
-        //
-        // var data = [trace1,trace2];
+        var trace2 = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Northern Hemisphere Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'NH'),
+            line: {color: '#7F7F7F'}
+        }
 
-        var data = [trace1];
+        var trace3 = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Southern Hemisphere Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SH'),
+            // line: {color: '#FA8072'}
+            line: {color: 'salmon'}
+        }
+
+        var data = [trace1,trace2,trace3];
+
+        // var data = [trace1];
 
         var layout = {
             title: 'UAH Temp Time Series'
@@ -245,18 +255,18 @@ function noaaBatteryParkTimeSeries() {
             line: {color: '#17BECF'}
         };
 
-        // var trace2 = {
-        //     type: "scatter",
-        //     mode: "lines",
-        //     name: 'NH Avg Temp',
-        //     x: unpack(rows, 'Date'),
-        //     y: unpack(rows, 'NH'),
-        //     line: {color: '#7F7F7F'}
-        // }
-        //
-        // var data = [trace1,trace2];
+        var trace2 = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Linear Trend',
+            x: unpack(rows, 'Year'),
+            y: unpack(rows, 'Linear_Trend'),
+            line: {color: '#7F7F7F'}
+        }
 
-        var data = [trace1];
+        var data = [trace1,trace2];
+
+        // var data = [trace1];
 
         var layout = {
             title: 'Battery Park, NY Tide Gauge'
