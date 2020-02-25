@@ -5,6 +5,7 @@ downloadSvg();
 annotations3d();
 basicTimeSeries();
 uahTempTimeSeries();
+noaaBatteryParkTimeSeries();
 
 /* Current Plotly.js version */
 console.log( Plotly.BUILD );
@@ -200,7 +201,7 @@ function uahTempTimeSeries() {
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'Globe'),
             line: {color: '#17BECF'}
-        }
+        };
 
         // var trace2 = {
         //     type: "scatter",
@@ -216,7 +217,7 @@ function uahTempTimeSeries() {
         var data = [trace1];
 
         var layout = {
-            title: 'UAH Temp Time Series',
+            title: 'UAH Temp Time Series'
         };
 
         Plotly.newPlot('uah-temp-time-series', data, layout);
@@ -224,7 +225,9 @@ function uahTempTimeSeries() {
 }
 
 function noaaBatteryParkTimeSeries() {
-    Plotly.d3.csv("https://tidesandcurrents.noaa.gov/sltrends/data/8518750_meantrend.csv", function(err, rows){
+    // Plotly.d3.csv("https://tidesandcurrents.noaa.gov/sltrends/data/8518750_meantrend.csv", function(err, rows){
+    // Plotly.d3.csv("http://localhost:8888/data/noaa_battery_park_ny_meantrend.csv", function(err, rows){
+    Plotly.d3.csv("http://localhost:8888/data/noaa_battery_park_ny_meantrend-dates.csv", function(err, rows){
     // Plotly.d3.dsv(" ", "http://localhost:8888/data/uah-monthly-date.txt", function(err, rows){
     // Plotly.d3.dsv("|", "http://localhost:8888/data/uah-monthly-date-delim.txt", function(err, rows){
 
@@ -240,7 +243,7 @@ function noaaBatteryParkTimeSeries() {
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'Monthly_MSL'),
             line: {color: '#17BECF'}
-        }
+        };
 
         // var trace2 = {
         //     type: "scatter",
@@ -256,10 +259,10 @@ function noaaBatteryParkTimeSeries() {
         var data = [trace1];
 
         var layout = {
-            title: 'Battery Park, NY Tide Gauge',
+            title: 'Battery Park, NY Tide Gauge'
         };
 
-        Plotly.newPlot('uah-temp-time-series', data, layout);
+        Plotly.newPlot('noaa-battery-park-time-series', data, layout);
     })
 }
 
