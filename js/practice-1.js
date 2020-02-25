@@ -223,3 +223,43 @@ function uahTempTimeSeries() {
     })
 }
 
+function noaaBatteryParkTimeSeries() {
+    Plotly.d3.csv("https://tidesandcurrents.noaa.gov/sltrends/data/8518750_meantrend.csv", function(err, rows){
+    // Plotly.d3.dsv(" ", "http://localhost:8888/data/uah-monthly-date.txt", function(err, rows){
+    // Plotly.d3.dsv("|", "http://localhost:8888/data/uah-monthly-date-delim.txt", function(err, rows){
+
+        function unpack(rows, key) {
+            return rows.map(function(row) { return row[key]; });
+        }
+
+
+        var trace1 = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Monthly sea level MSL',
+            x: unpack(rows, 'Year'),
+            y: unpack(rows, 'Monthly_MSL'),
+            line: {color: '#17BECF'}
+        }
+
+        // var trace2 = {
+        //     type: "scatter",
+        //     mode: "lines",
+        //     name: 'NH Avg Temp',
+        //     x: unpack(rows, 'Date'),
+        //     y: unpack(rows, 'NH'),
+        //     line: {color: '#7F7F7F'}
+        // }
+        //
+        // var data = [trace1,trace2];
+
+        var data = [trace1];
+
+        var layout = {
+            title: 'Battery Park, NY Tide Gauge',
+        };
+
+        Plotly.newPlot('uah-temp-time-series', data, layout);
+    })
+}
+

@@ -7,8 +7,14 @@ get it from https://cdn.plot.ly/plotly-latest.min.js.
 ## Run it
 
 Run Python simple HTTP server from root of project directory:
+
+(Linux/Mac)
 ```shell
 python -m SimpleHTTPServer 8888
+```
+(Windows)
+```shell
+python -m http.server 8888
 ```
 
 Access the page in a browser at http://localhost:8888/practice-1.html
