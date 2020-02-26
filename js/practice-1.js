@@ -157,7 +157,7 @@ function basicTimeSeries() {
 
         function unpack(rows, key) {
             return rows.map(function(row) { return row[key]; });
-        }
+        };
 
 
         var trace1 = {
@@ -167,7 +167,7 @@ function basicTimeSeries() {
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'AAPL.High'),
             line: {color: '#17BECF'}
-        }
+        };
 
         var trace2 = {
             type: "scatter",
@@ -176,7 +176,7 @@ function basicTimeSeries() {
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'AAPL.Low'),
             line: {color: '#7F7F7F'}
-        }
+        };
 
         var data = [trace1,trace2];
 
@@ -198,6 +198,15 @@ function uahTempTimeSeries() {
             return rows.map(function(row) { return row[key]; });
         }
 
+        var config = {
+            toImageButtonOptions: {
+                format: 'svg', // one of png, svg, jpeg, webp
+                filename: 'custom_image',
+                height: 500,
+                width: 1300,
+                scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+            }
+        };
 
         var trace1 = {
             type: "scatter",
@@ -215,7 +224,7 @@ function uahTempTimeSeries() {
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'NH'),
             line: {color: '#7F7F7F'}
-        }
+        };
 
         var trace3 = {
             type: "scatter",
@@ -225,7 +234,7 @@ function uahTempTimeSeries() {
             y: unpack(rows, 'SH'),
             // line: {color: '#FA8072'}
             line: {color: 'salmon'}
-        }
+        };
 
         var data = [trace1,trace2,trace3];
 
@@ -235,7 +244,7 @@ function uahTempTimeSeries() {
             title: 'UAH Temp Time Series'
         };
 
-        Plotly.newPlot('uah-temp-time-series', data, layout);
+        Plotly.newPlot('uah-temp-time-series', data, layout, config);
     })
 }
 
@@ -249,8 +258,17 @@ function noaaBatteryParkTimeSeries() {
 
         function unpack(rows, key) {
             return rows.map(function(row) { return row[key]; });
-        }
+        };
 
+        var config = {
+            toImageButtonOptions: {
+                format: 'svg', // one of png, svg, jpeg, webp
+                filename: 'custom_image',
+                height: 500,
+                width: 1300,
+                scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+            }
+        };
 
         var trace1 = {
             type: "scatter",
@@ -268,7 +286,7 @@ function noaaBatteryParkTimeSeries() {
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'Linear_Trend'),
             line: {color: '#7F7F7F'}
-        }
+        };
 
         var data = [trace1,trace2];
 
@@ -278,7 +296,7 @@ function noaaBatteryParkTimeSeries() {
             title: 'Battery Park, NY Tide Gauge'
         };
 
-        Plotly.newPlot('noaa-battery-park-time-series', data, layout);
+        Plotly.newPlot('noaa-battery-park-time-series', data, layout, config);
     })
 }
 
