@@ -1,4 +1,7 @@
 
+var serverRoot = 'http://localhost:8888';
+// var serverRoot = 'http://yburbs.com';
+
 simplePlot();
 staticChart();
 downloadSvg();
@@ -149,7 +152,8 @@ function annotations3d() {
 
 function basicTimeSeries() {
     // Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv", function(err, rows){
-    Plotly.d3.csv("http://localhost:8888/data/finance-charts-apple.csv", function(err, rows){
+    // Plotly.d3.csv("http://localhost:8888/data/finance-charts-apple.csv", function(err, rows){
+    Plotly.d3.csv(serverRoot + "/data/finance-charts-apple.csv", function(err, rows){
 
         function unpack(rows, key) {
             return rows.map(function(row) { return row[key]; });
@@ -185,7 +189,8 @@ function basicTimeSeries() {
 }
 
 function uahTempTimeSeries() {
-    Plotly.d3.csv("http://localhost:8888/data/uah-monthly.csv", function(err, rows){
+    // Plotly.d3.csv("http://localhost:8888/data/uah-monthly.csv", function(err, rows){
+    Plotly.d3.csv(serverRoot + "/data/uah-monthly.csv", function(err, rows){
     // Plotly.d3.dsv(" ", "http://localhost:8888/data/uah-monthly-date.txt", function(err, rows){
     // Plotly.d3.dsv("|", "http://localhost:8888/data/uah-monthly-date-delim.txt", function(err, rows){
 
@@ -237,7 +242,8 @@ function uahTempTimeSeries() {
 function noaaBatteryParkTimeSeries() {
     // Plotly.d3.csv("https://tidesandcurrents.noaa.gov/sltrends/data/8518750_meantrend.csv", function(err, rows){
     // Plotly.d3.csv("http://localhost:8888/data/noaa_battery_park_ny_meantrend.csv", function(err, rows){
-    Plotly.d3.csv("http://localhost:8888/data/noaa_battery_park_ny_meantrend-dates.csv", function(err, rows){
+    // Plotly.d3.csv("http://localhost:8888/data/noaa_battery_park_ny_meantrend-dates.csv", function(err, rows){
+    Plotly.d3.csv(serverRoot + "/data/noaa_battery_park_ny_meantrend-dates.csv", function(err, rows){
     // Plotly.d3.dsv(" ", "http://localhost:8888/data/uah-monthly-date.txt", function(err, rows){
     // Plotly.d3.dsv("|", "http://localhost:8888/data/uah-monthly-date-delim.txt", function(err, rows){
 
