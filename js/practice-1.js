@@ -1,6 +1,6 @@
 
 var serverRoot = 'http://localhost:8888';
-// var serverRoot = 'http://yburbs.com';
+// var serverRoot = 'http://yburbs.com/plotly-practice-1';
 
 simplePlot();
 staticChart();
