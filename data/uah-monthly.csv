@@ -1,4 +1,4 @@
-Date,Globe,Land,Ocean,NH,Land,Ocean,SH,Land,Ocean,Trpcs,Land,Ocean,NoExt,Land,Ocean,SoExt,Land,Ocean,NoPol,Land,Ocean,SoPol,Land,Ocean,USA48,USA49,AUST
+Date,Globe,GLand,GOcean,NH,NLand,NOcean,SH,SLand,SOcean,Trpcs,TLand,TOcean,NoExt,NxLand,NxOcean,SoExt,SxLand,SxOcean,NoPol,NpLand,NpOcean,SoPol,SpLand,SpOcean,USA48,USA49,AUST
 1978-12-01,-0.36,-0.36,-0.36,-0.31,-0.30,-0.31,-0.41,-0.49,-0.39,-0.47,-0.49,-0.47,-0.23,-0.27,-0.20,-0.37,-0.41,-0.36,-0.24,-0.55,0.12,-0.35,-0.21,-0.42,-1.03,-0.94,-1.20
 1979-01-01,-0.33,-0.48,-0.27,-0.48,-0.69,-0.35,-0.18,-0.00,-0.22,-0.37,-0.42,-0.36,-0.54,-0.75,-0.35,-0.08,0.26,-0.15,-0.11,-0.65,0.51,-0.11,-0.08,-0.12,-3.07,-2.25,1.16
 1979-02-01,-0.27,-0.35,-0.24,-0.25,-0.32,-0.21,-0.29,-0.41,-0.27,-0.23,-0.09,-0.27,-0.27,-0.40,-0.16,-0.31,-0.58,-0.27,-1.71,-2.06,-1.32,-0.68,-1.09,-0.49,-1.55,-1.59,-0.21

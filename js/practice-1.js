@@ -208,35 +208,198 @@ function uahTempTimeSeries() {
             }
         };
 
-        var trace1 = {
+        var traceGlobe = {
             type: "scatter",
             mode: "lines",
             name: 'Global Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'Globe'),
-            line: {color: '#17BECF'}
+            line: {color: '#008000'}
+            // line: {color: '[rgb(171,0,16)]'}
         };
 
-        var trace2 = {
+        // var traceGlobe = {
+        //     type: "scatter",
+        //     mode: "lines",
+        //     name: 'Global Avg Temp',
+        //     x: unpack(rows, 'Date'),
+        //     y: unpack(rows, 'Globe'),
+        //
+        //     // line: {color: '#008000'}
+        //     // line: {color: '[[0, rgb(0,52,224)], [1, rgb(171,0,16)]]'}
+        //     line: {color: '[[0, rgb(171,0,16)], [1, rgb(0,52,224)]]'}
+        // };
+
+        // var traceGlobe = {
+        //     type: "scatter",
+        //     mode: "lines",
+        //     fill: 'tozeroy',
+        //     name: 'Global Avg Temp',
+        //     x: unpack(rows, 'Date'),
+        //     y: unpack(rows, 'Globe'),
+        //
+        //     // line: {color: '#008000'}
+        //     line: {color: '[[0, rgb(0,52,224)], [1, rgb(171,0,16)]]'}
+        //     // line: {color: '[[0, rgb(171,0,16)], [1, rgb(0,52,224)]]'}
+        // };
+
+        // var traceNLand = {
+        //     type: "scatter",
+        //     mode: "lines",
+        //     // fill: 'tonexty',
+        //     fill: 'tozeroy',
+        //     name: 'NH Land Avg Temp',
+        //     x: unpack(rows, 'Date'),
+        //     y: unpack(rows, 'NLand'),
+        //     line: {color: '#aa7100'}
+        // };
+
+        var traceGlobeLand = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Global Land Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'GLand'),
+            line: {color: '#af6700'}
+        };
+
+        var traceGlobeOcean = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Global Ocean Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'GOcean'),
+            line: {color: '#0083e0'}
+        };
+
+        var traceNH = {
             type: "scatter",
             mode: "lines",
             name: 'Northern Hemisphere Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'NH'),
-            line: {color: '#7F7F7F'}
+            line: {color: '#36cb00'}
         };
 
-        var trace3 = {
+        var traceNLand = {
+            type: "scatter",
+            mode: "lines",
+            name: 'NH Land Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'NLand'),
+            line: {color: '#aa7100'}
+        };
+
+        var traceNOcean = {
+            type: "scatter",
+            mode: "lines",
+            name: 'NH Ocean Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'NOcean'),
+            line: {color: '#00a6aa'}
+        };
+
+        var traceSH = {
             type: "scatter",
             mode: "lines",
             name: 'Southern Hemisphere Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'SH'),
-            // line: {color: '#FA8072'}
-            line: {color: 'salmon'}
+            line: {color: '#3bee00'}
         };
 
-        var data = [trace1,trace2,trace3];
+        var traceSLand = {
+            type: "scatter",
+            mode: "lines",
+            name: 'SH Land Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SLand'),
+            line: {color: '#cb8c00'}
+        };
+
+        var traceSOcean = {
+            type: "scatter",
+            mode: "lines",
+            name: 'SH Ocean Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SOcean'),
+            line: {color: '#00d0d0'}
+        };
+
+        var traceTrpcs = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Tropics Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'Trpcs'),
+            line: {color: '#d90000'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceNoExt = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Northern Extremes Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'NoExt'),
+            line: {color: '#c200d9'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceSoExt = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Southern Extremes Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SoExt'),
+            line: {color: '#d99d00'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceNoPol = {
+            type: "scatter",
+            mode: "lines",
+            name: 'North Polar Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'NoPol'),
+            line: {color: '#0087d9'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceSoPol = {
+            type: "scatter",
+            mode: "lines",
+            name: 'South Polar Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SoPol'),
+            line: {color: '#00e0eb'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceUSA48 = {
+            type: "scatter",
+            mode: "lines",
+            name: 'USA Lower 48 Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'USA48'),
+            line: {color: '#0008eb'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceUSA49 = {
+            type: "scatter",
+            mode: "lines",
+            name: 'USA 49 States Avg Temp',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'USA49'),
+            line: {color: '#eb6600'}
+            // line: {color: 'salmon'}
+        };
+
+        // var data = [traceGlobe,traceNLand];
+        // var data = [traceGlobe,traceNH,traceSH,traceTrpcs];
+        var data = [traceGlobe,traceNH,traceSH,traceTrpcs,traceNoExt,traceSoExt,traceNoPol,traceSoPol,traceUSA48,traceUSA49];
+        // var data = [traceGlobe,traceGlobeLand,traceGlobeOcean,traceNH,traceNLand,traceNOcean,traceSH,traceSLand,traceSOcean];
 
         // var data = [trace1];
 
