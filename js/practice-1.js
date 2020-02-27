@@ -269,6 +269,7 @@ function uahTempTimeSeries() {
             name: 'Global Ocean Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'GOcean'),
+            visible: 'legendonly',
             line: {color: '#0083e0'}
         };
 
@@ -278,6 +279,9 @@ function uahTempTimeSeries() {
             name: 'Northern Hemisphere Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'NH'),
+            // showlegend: false,
+            // visible: false,
+            visible: 'legendonly',
             line: {color: '#36cb00'}
         };
 
@@ -287,6 +291,7 @@ function uahTempTimeSeries() {
             name: 'NH Land Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'NLand'),
+            visible: 'legendonly',
             line: {color: '#aa7100'}
         };
 
@@ -296,6 +301,7 @@ function uahTempTimeSeries() {
             name: 'NH Ocean Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'NOcean'),
+            visible: 'legendonly',
             line: {color: '#00a6aa'}
         };
 
@@ -305,6 +311,7 @@ function uahTempTimeSeries() {
             name: 'Southern Hemisphere Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'SH'),
+            visible: 'legendonly',
             line: {color: '#3bee00'}
         };
 
@@ -314,6 +321,7 @@ function uahTempTimeSeries() {
             name: 'SH Land Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'SLand'),
+            visible: 'legendonly',
             line: {color: '#cb8c00'}
         };
 
@@ -323,6 +331,7 @@ function uahTempTimeSeries() {
             name: 'SH Ocean Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'SOcean'),
+            visible: 'legendonly',
             line: {color: '#00d0d0'}
         };
 
@@ -332,6 +341,7 @@ function uahTempTimeSeries() {
             name: 'Tropics Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'Trpcs'),
+            visible: 'legendonly',
             line: {color: '#d90000'}
             // line: {color: 'salmon'}
         };
@@ -342,6 +352,7 @@ function uahTempTimeSeries() {
             name: 'Northern Extremes Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'NoExt'),
+            visible: 'legendonly',
             line: {color: '#c200d9'}
             // line: {color: 'salmon'}
         };
@@ -352,6 +363,7 @@ function uahTempTimeSeries() {
             name: 'Southern Extremes Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'SoExt'),
+            visible: 'legendonly',
             line: {color: '#d99d00'}
             // line: {color: 'salmon'}
         };
@@ -362,6 +374,7 @@ function uahTempTimeSeries() {
             name: 'North Polar Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'NoPol'),
+            visible: 'legendonly',
             line: {color: '#0087d9'}
             // line: {color: 'salmon'}
         };
@@ -372,6 +385,7 @@ function uahTempTimeSeries() {
             name: 'South Polar Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'SoPol'),
+            visible: 'legendonly',
             line: {color: '#00e0eb'}
             // line: {color: 'salmon'}
         };
@@ -382,6 +396,7 @@ function uahTempTimeSeries() {
             name: 'USA Lower 48 Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'USA48'),
+            visible: 'legendonly',
             line: {color: '#0008eb'}
             // line: {color: 'salmon'}
         };
@@ -392,6 +407,7 @@ function uahTempTimeSeries() {
             name: 'USA 49 States Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'USA49'),
+            visible: 'legendonly',
             line: {color: '#eb6600'}
             // line: {color: 'salmon'}
         };
