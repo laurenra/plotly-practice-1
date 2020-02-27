@@ -214,7 +214,8 @@ function uahTempTimeSeries() {
             name: 'Global Avg Temp',
             x: unpack(rows, 'Date'),
             y: unpack(rows, 'Globe'),
-            line: {color: '#008000'}
+            // line: {color: '#008000'}
+            line: {color: '#555555'}
             // line: {color: '[rgb(171,0,16)]'}
         };
 
@@ -420,7 +421,28 @@ function uahTempTimeSeries() {
         // var data = [trace1];
 
         var layout = {
-            title: 'UAH Temp Time Series'
+            title: 'UAH Temperature Time Series',
+            annotations: [{
+                text: '(December, 1978&#8211;present)',
+                font: {
+                    size: 13
+                    // color: '#eb6600'
+                },
+                showarrow: false,
+                align: 'center',
+                x: 0.6,
+                y: 1.15,
+                xref: 'paper',
+                yref: 'paper'
+            }],
+            xaxis: {
+                // title: 'Year (December 1978&ndash;present)'
+                title: 'Year'
+                // title: 'Year (December 1978&#x2013;present)'
+            },
+            yaxis: {
+                title: 'Temperature &deg;C'
+            }
         };
 
         Plotly.newPlot('uah-temp-time-series', data, layout, config);
