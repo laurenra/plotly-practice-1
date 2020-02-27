@@ -36,3 +36,14 @@ http://learnjsdata.com/read_data.html
 https://www.tutorialsteacher.com/d3js/loading-data-from-file-in-d3js
 
 [Run SimpleHTTPServer to solve CORS error for local files](https://stackoverflow.com/questions/21006647/cannot-import-data-from-csv-file-in-d3)
+
+## Data
+
+[UAH Temperature data (fixed-length)](https://www.nsstc.uah.edu/data/msu/v6.0/tlt/uahncdc_lt_6.0.txt)
+
+1. read into Excel
+2. save as CSV
+3. change dates to yyyy-mm-dd format
+4. modify header names
+5. delete footer
+6. save as uahncdc_lt_6.0_monthly.csv
