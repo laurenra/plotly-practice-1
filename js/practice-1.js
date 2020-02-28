@@ -1,7 +1,10 @@
 
 // var serverRoot = 'http://localhost:8888';
 // var serverRoot = 'http://yburbs.com/plotly-practice-1';
-var serverRoot = location.protocol + "//" + location.host;
+
+var serverPath = location.pathname; // "/plotly-practice-1/practice1.html"
+var pathOnly = serverPath.substr(0, location.pathname.lastIndexOf("/"));
+var serverRoot = location.protocol + "//" + location.host + pathOnly;
 
 simplePlot();
 staticChart();
