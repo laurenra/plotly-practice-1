@@ -6,84 +6,16 @@ var serverPath = location.pathname; // "/plotly-practice-1/practice1.html"
 var pathOnly = serverPath.substr(0, location.pathname.lastIndexOf("/"));
 var serverRoot = location.protocol + "//" + location.host + pathOnly;
 
-simplePlot();
-staticChart();
-downloadSvg();
 annotations3d();
-basicTimeSeries();
 uahTempTimeSeries();
 noaaBatteryParkTimeSeries();
+// simplePlot();
+// staticChart();
+// downloadSvg();
+// basicTimeSeries();
 
 /* Current Plotly.js version */
 console.log( Plotly.BUILD );
-
-/**
- * Basic simple plot
- */
-function simplePlot() {
-    TESTER = document.getElementById('simple-plot');
-
-    Plotly.plot( TESTER, [{
-        x: [1, 2, 3, 4, 5],
-        y: [1, 2, 4, 8, 16] }], {
-        margin: { t: 0 } }, {showSendToCloud:true} );
-}
-
-/**
- * Create a static chart instead of the default interactive one
- */
-function staticChart() {
-    var trace1 = {
-        x: [0, 1, 2, 3, 4, 5, 6],
-        y: [1, 9, 4, 7, 5, 2, 4],
-        mode: 'markers',
-        marker: {
-            size: [20, 40, 25, 10, 60, 90, 30],
-        }
-    };
-
-    var data = [trace1];
-
-    var layout = {
-        title: 'Create a Static Chart',
-        showlegend: false
-    };
-
-    Plotly.newPlot('static-plot', data, layout, {staticPlot: true});
-}
-
-/**
- * Change default download image to SVG instead of PNG
- */
-function downloadSvg() {
-    var trace1 = {
-        x: [0, 1, 2, 3, 4, 5, 6],
-        y: [1, 9, 4, 7, 5, 2, 4],
-        mode: 'markers',
-        marker: {
-            size: [20, 40, 25, 10, 60, 90, 30],
-        }
-    };
-
-    var data = [trace1];
-
-    var layout = {
-        title: 'Download Chart as SVG instead of PNG',
-        showlegend: false
-    };
-
-    var config = {
-        toImageButtonOptions: {
-            format: 'svg', // one of png, svg, jpeg, webp
-            filename: 'custom_image',
-            height: 500,
-            width: 700,
-            scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
-        }
-    };
-
-    Plotly.newPlot('download-svg', data, layout, config);
-}
 
 function annotations3d() {
     var data = [{
@@ -154,44 +86,9 @@ function annotations3d() {
     Plotly.newPlot('annotations-3d', data, layout);
 }
 
-function basicTimeSeries() {
-    // Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv", function(err, rows){
-    // Plotly.d3.csv("http://localhost:8888/data/finance-charts-apple.csv", function(err, rows){
-    Plotly.d3.csv(serverRoot + "/data/finance-charts-apple.csv", function(err, rows){
-
-        function unpack(rows, key) {
-            return rows.map(function(row) { return row[key]; });
-        };
-
-
-        var trace1 = {
-            type: "scatter",
-            mode: "lines",
-            name: 'AAPL High',
-            x: unpack(rows, 'Date'),
-            y: unpack(rows, 'AAPL.High'),
-            line: {color: '#17BECF'}
-        };
-
-        var trace2 = {
-            type: "scatter",
-            mode: "lines",
-            name: 'AAPL Low',
-            x: unpack(rows, 'Date'),
-            y: unpack(rows, 'AAPL.Low'),
-            line: {color: '#7F7F7F'}
-        };
-
-        var data = [trace1,trace2];
-
-        var layout = {
-            title: 'Basic Time Series',
-        };
-
-        Plotly.newPlot('basic-time-series', data, layout);
-    })
-}
-
+/**
+ * UAH Global Satellite Temperature
+ */
 function uahTempTimeSeries() {
     // Plotly.d3.csv("http://localhost:8888/data/uah-monthly.csv", function(err, rows){
     Plotly.d3.csv(serverRoot + "/data/uahncdc_lt_6.0_monthly.csv", function(err, rows){
@@ -453,6 +350,9 @@ function uahTempTimeSeries() {
     })
 }
 
+/**
+ * NOAA Battery Park, NY Sea Level Rise
+ */
 function noaaBatteryParkTimeSeries() {
     // Plotly.d3.csv("https://tidesandcurrents.noaa.gov/sltrends/data/8518750_meantrend.csv", function(err, rows){
     // Plotly.d3.csv("http://localhost:8888/data/noaa_battery_park_ny_meantrend.csv", function(err, rows){
@@ -504,4 +404,115 @@ function noaaBatteryParkTimeSeries() {
         Plotly.newPlot('noaa-battery-park-time-series', data, layout, config);
     })
 }
+
+/**
+ * Basic simple plot
+ */
+function simplePlot() {
+    TESTER = document.getElementById('simple-plot');
+
+    Plotly.plot( TESTER, [{
+        x: [1, 2, 3, 4, 5],
+        y: [1, 2, 4, 8, 16] }], {
+        margin: { t: 0 } }, {showSendToCloud:true} );
+}
+
+/**
+ * Create a static chart instead of the default interactive one
+ */
+function staticChart() {
+    var trace1 = {
+        x: [0, 1, 2, 3, 4, 5, 6],
+        y: [1, 9, 4, 7, 5, 2, 4],
+        mode: 'markers',
+        marker: {
+            size: [20, 40, 25, 10, 60, 90, 30],
+        }
+    };
+
+    var data = [trace1];
+
+    var layout = {
+        title: 'Create a Static Chart',
+        showlegend: false
+    };
+
+    Plotly.newPlot('static-plot', data, layout, {staticPlot: true});
+}
+
+/**
+ * Change default download image to SVG instead of PNG
+ */
+function downloadSvg() {
+    var trace1 = {
+        x: [0, 1, 2, 3, 4, 5, 6],
+        y: [1, 9, 4, 7, 5, 2, 4],
+        mode: 'markers',
+        marker: {
+            size: [20, 40, 25, 10, 60, 90, 30],
+        }
+    };
+
+    var data = [trace1];
+
+    var layout = {
+        title: 'Download Chart as SVG instead of PNG',
+        showlegend: false
+    };
+
+    var config = {
+        toImageButtonOptions: {
+            format: 'svg', // one of png, svg, jpeg, webp
+            filename: 'custom_image',
+            height: 500,
+            width: 700,
+            scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+        }
+    };
+
+    Plotly.newPlot('download-svg', data, layout, config);
+}
+
+/**
+ * Basic time series from sample finance chart
+ */
+function basicTimeSeries() {
+    // Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv", function(err, rows){
+    // Plotly.d3.csv("http://localhost:8888/data/finance-charts-apple.csv", function(err, rows){
+    Plotly.d3.csv(serverRoot + "/data/finance-charts-apple.csv", function(err, rows){
+
+        function unpack(rows, key) {
+            return rows.map(function(row) { return row[key]; });
+        };
+
+
+        var trace1 = {
+            type: "scatter",
+            mode: "lines",
+            name: 'AAPL High',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'AAPL.High'),
+            line: {color: '#17BECF'}
+        };
+
+        var trace2 = {
+            type: "scatter",
+            mode: "lines",
+            name: 'AAPL Low',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'AAPL.Low'),
+            line: {color: '#7F7F7F'}
+        };
+
+        var data = [trace1,trace2];
+
+        var layout = {
+            title: 'Basic Time Series',
+        };
+
+        Plotly.newPlot('basic-time-series', data, layout);
+    })
+}
+
+
 
