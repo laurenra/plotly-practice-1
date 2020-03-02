@@ -1,9 +1,11 @@
 # Plotly Practice 1
+
 Practice using Plotly JS to graph data.
 
 **Note:** plotly-latest.min.js is copied to the **js/lib** directory for
 fast loading. It is **not** included in the project so you will have to
 get it from https://cdn.plot.ly/plotly-latest.min.js.
+
 ## Run it
 
 Run Python simple HTTP server from root of project directory:
@@ -17,9 +19,13 @@ python -m SimpleHTTPServer 8888
 python -m http.server 8888
 ```
 
-Access the page in a browser at http://localhost:8888/practice-1.html
+- Access the page in a browser at http://localhost:8888/practice-1.html.
+- You can reference everything in the project local directory as
+subdirectories and files under localhost:8000.
+- Stop the server with Ctrl+C.
 
 ## Create deployment tarball
+
 To simplify deploying to a web server, use the **make-deployment-tar** 
 script to create a tarball with all the files required.
 
