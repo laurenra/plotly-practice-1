@@ -19,6 +19,27 @@ python -m http.server 8888
 
 Access the page in a browser at http://localhost:8888/practice-1.html
 
+## Create deployment tarball
+To simplify deploying to a web server, use the **make-deployment-tar** 
+script to create a tarball with all the files required.
+
+1\. Run the script. 
+
+```shell script
+./make-deployment-tar
+```
+
+2\. Copy **plotly-practice-1.tar** to the server.
+
+3\. Extract the files.
+
+```shell script
+tar xvf plotly-practice-1.tar
+```
+
+Update the script when you add files to the project that are 
+required for deployment. 
+
 ## Tutorials and Reference
 
 [Plotly JavaScript Reference and Examples](https://plot.ly/javascript/)
