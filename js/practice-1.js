@@ -6,9 +6,15 @@ var serverPath = location.pathname; // "/plotly-practice-1/practice1.html"
 var pathOnly = serverPath.substr(0, location.pathname.lastIndexOf("/"));
 var serverRoot = location.protocol + "//" + location.host + pathOnly;
 
+/**
+ * Create a URL query generator ("Copy Link" button) for the graph.
+ */
+
+getUrlParamsTest();
 annotations3d();
-uahTempTimeSeries();
 noaaBatteryParkTimeSeries();
+uahTempTimeSeries();
+
 // simplePlot();
 // staticChart();
 // downloadSvg();
@@ -16,6 +22,24 @@ noaaBatteryParkTimeSeries();
 
 /* Current Plotly.js version */
 console.log( Plotly.BUILD );
+
+function getUrlParamsTest() {
+    var urlFull = window.location.href; // get entire URL
+    var queryIdx = urlFull.indexOf('?');
+    var urlQuery = urlFull.split('?'); // original string of no ? for query
+    var urlParms = urlFull.split('&');
+
+    var urlSrch = window.location.search; // get query string only, including initial ?
+
+    var urlSearchParams = new URLSearchParams(window.location.search);
+
+    var entries = urlSearchParams.entries();
+    for (keyval of entries) {
+        console.log(keyval[0], keyval[1]);
+    }
+}
+
+
 
 function annotations3d() {
     var data = [{
@@ -87,9 +111,85 @@ function annotations3d() {
 }
 
 /**
+ * Check query parameters to see if plot line is displayed.
+ *
+ * urlParm = URL query string (gAll, nhAll, tOcean, etc.)
+ *
+ * defaultDisplay = true:   null, &parm, &parm=1  return true   (show plot line)
+ *                          &parm=0               returns false (don't show plot line)
+ *
+ * defaultDisplay = false:  &parm, &parm=1        return true   (show plot line)
+ *                          null, &parm=0         return false  (don't show plot line)
+ */
+function displayPlotLine( urlParm = '', defaultDisplay = true) {
+    var displayLine;
+
+    /* Get URL query parameters to figure out what plots to show. */
+    var urlQuery = new URLSearchParams(window.location.search);
+
+    if (defaultDisplay == true) {
+        // displayLine = urlQuery.get(urlParm) ? (urlQuery.get(urlParm) == 0) ? 'hide' : 'show' : 'show';
+        displayLine = urlQuery.get(urlParm) ? (urlQuery.get(urlParm) == 0) ? false : true : true;
+    }
+    else {
+        // displayLine = urlQuery.get(urlParm) == 1 ? 'show' : (urlQuery.get(urlParm) == '') ? 'show' : 'hide';
+        displayLine = urlQuery.get(urlParm) == 1 ? true : (urlQuery.get(urlParm) == '') ? true : false;
+    }
+
+    // var urlgAllT = urlQuery.get('gAll') ? 'true' : 'false';           // &gAll=1 true,  &gAll=0 true,  &gAll FALSE, (na) FALSE
+    // var urlgAllT = (urlQuery.get('gAll') == null) ? 'true' : 'false'; // &gAll=1 FALSE, &gAll=0 FALSE, &gAll FALSE, (na) true
+    // var urlgAllT = (urlQuery.get('gAll') == '') ? 'true' : 'false';   // &gAll=1 FALSE, &gAll=0 FALSE, &gAll true,  (na) FALSE
+    // var urlgAllT = (urlQuery.get('gAll') == 0) ? 'true' : 'false';    // &gAll=1 FALSE, &gAll=0 true,  &gAll true,  (na) FALSE
+    // var urlgAllT = (urlQuery.get('gAll') == 1) ? 'true' : 'false';    // &gAll=1 true,  &gAll=0 FALSE, &gAll FALSE, (na) FALSE
+
+    return displayLine;
+}
+
+/**
+ * url query parameters show/hide plot lines
+ *
+ * ga, gl, go = global All, Land, Oceans
+ * na, nl, no = northern hemisphere All, Land, Oceans
+ * sa, sl, so = southern hemisphere All, Land, Oceans
+ * ta, tl, to = tropics All, Land, Oceans
+ * nxa, nxl, nxo = northern extratropical All, Land, Oceans
+ * sxa, sxl, sxo = northern extratropical All, Land, Oceans
+ * npa, npl, npo = northern polar All, Land, Oceans
+ * spa, spl, spo = southern polar All, Land, Oceans
+ * us48, us49, aus = US lower 48, US 48 + Alaska, Australia?
+ *
  * UAH Global Satellite Temperature
+ *  GL 90S-90N, NH 0-90N, SH 90S-0,
+ *  TRPCS 20S-20N, NoExt 20N-90N, SoExt 90S-20S,
+ *  NoPol 60N-90N, SoPol 90S-60S
+ *
+ *  NoExt = Northern Extratropical
+ *  SoExt = Southern Extratropical
+ *  NoPol = Northern Polar
+ *  SoPol = Southern Polar
+ *  USA48 = USA lower-48
+ *  USA49 = USA lower-48 + Alaska
  */
 function uahTempTimeSeries() {
+
+    /**
+     * Global temp
+     * no param: visible = true
+     * gAll:     visible = true
+     * gAll=0:   visible = 'legendonly'
+     * gAll=1:   visible = true
+     *
+     * Tropics (and all others)
+     * no param: visible = 'legendonly'
+     * tAll:     visible = true
+     * tAll=0:   visible = 'legendonly'
+     * tAll=1:   visible = true
+     */
+
+    // var gAllDisplay = displayPlotLine('gAll', true);
+    // var tAllDisplay = displayPlotLine('tAll', false);
+
+    /* Get data and build plot(s). */
     // Plotly.d3.csv("http://localhost:8888/data/uah-monthly.csv", function(err, rows){
     Plotly.d3.csv(serverRoot + "/data/uahncdc_lt_6.0_monthly.csv", function(err, rows){
     // Plotly.d3.dsv(" ", "http://localhost:8888/data/uah-monthly-date.txt", function(err, rows){
@@ -112,25 +212,16 @@ function uahTempTimeSeries() {
         var traceGlobe = {
             type: "scatter",
             mode: "lines",
-            name: 'Global Avg Temp',
+            name: 'Global Average',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'Globe'),
+            visible: displayPlotLine('ga', true) ? true : 'legendonly',
+            // visible: urlParms.get('gAll') ?
             // line: {color: '#008000'}
             line: {color: '#555555'}
             // line: {color: '[rgb(171,0,16)]'}
         };
 
-        // var traceGlobe = {
-        //     type: "scatter",
-        //     mode: "lines",
-        //     name: 'Global Avg Temp',
-        //     x: unpack(rows, 'Year'),
-        //     y: unpack(rows, 'Globe'),
-        //
-        //     // line: {color: '#008000'}
-        //     // line: {color: '[[0, rgb(0,52,224)], [1, rgb(171,0,16)]]'}
-        //     line: {color: '[[0, rgb(171,0,16)], [1, rgb(0,52,224)]]'}
-        // };
 
         // var traceGlobe = {
         //     type: "scatter",
@@ -159,91 +250,92 @@ function uahTempTimeSeries() {
         var traceGlobeLand = {
             type: "scatter",
             mode: "lines",
-            name: 'Global Land Avg Temp',
+            name: 'Global Land Only',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'GLand'),
+            visible: displayPlotLine('gl', false) ? true : 'legendonly',
             line: {color: '#af6700'}
         };
 
         var traceGlobeOcean = {
             type: "scatter",
             mode: "lines",
-            name: 'Global Ocean Avg Temp',
+            name: 'Global Ocean Only',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'GOcean'),
-            visible: 'legendonly',
+            visible: displayPlotLine('go', false) ? true : 'legendonly',
             line: {color: '#0083e0'}
         };
 
         var traceNH = {
             type: "scatter",
             mode: "lines",
-            name: 'Northern Hemisphere Avg Temp',
+            name: 'Northern Hemisphere',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'NH'),
             // showlegend: false,
             // visible: false,
-            visible: 'legendonly',
+            visible: displayPlotLine('na', false) ? true : 'legendonly',
             line: {color: '#36cb00'}
         };
 
         var traceNLand = {
             type: "scatter",
             mode: "lines",
-            name: 'NH Land Avg Temp',
+            name: 'NH Land Only',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'NLand'),
-            visible: 'legendonly',
+            visible: displayPlotLine('nl', false) ? true : 'legendonly',
             line: {color: '#aa7100'}
         };
 
         var traceNOcean = {
             type: "scatter",
             mode: "lines",
-            name: 'NH Ocean Avg Temp',
+            name: 'NH Ocean Only',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'NOcean'),
-            visible: 'legendonly',
+            visible: displayPlotLine('no', false) ? true : 'legendonly',
             line: {color: '#00a6aa'}
         };
 
         var traceSH = {
             type: "scatter",
             mode: "lines",
-            name: 'Southern Hemisphere Avg Temp',
+            name: 'Southern Hemisphere',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'SH'),
-            visible: 'legendonly',
+            visible: displayPlotLine('sa', false) ? true : 'legendonly',
             line: {color: '#3bee00'}
         };
 
         var traceSLand = {
             type: "scatter",
             mode: "lines",
-            name: 'SH Land Avg Temp',
+            name: 'SH Land Only',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'SLand'),
-            visible: 'legendonly',
+            visible: displayPlotLine('sl', false) ? true : 'legendonly',
             line: {color: '#cb8c00'}
         };
 
         var traceSOcean = {
             type: "scatter",
             mode: "lines",
-            name: 'SH Ocean Avg Temp',
+            name: 'SH Ocean Only',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'SOcean'),
-            visible: 'legendonly',
+            visible: displayPlotLine('so', false) ? true : 'legendonly',
             line: {color: '#00d0d0'}
         };
 
         var traceTrpcs = {
             type: "scatter",
             mode: "lines",
-            name: 'Tropics Avg Temp',
+            name: 'Tropics (20°S–20°N)',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'Trpcs'),
-            visible: 'legendonly',
+            visible: displayPlotLine('ta', false) ? true : 'legendonly',
             line: {color: '#d90000'}
             // line: {color: 'salmon'}
         };
@@ -251,10 +343,10 @@ function uahTempTimeSeries() {
         var traceNoExt = {
             type: "scatter",
             mode: "lines",
-            name: 'Northern Extremes Avg Temp',
+            name: 'NH Extratropical (20°N–90°N)',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'NoExt'),
-            visible: 'legendonly',
+            visible: displayPlotLine('nxa', false) ? true : 'legendonly',
             line: {color: '#c200d9'}
             // line: {color: 'salmon'}
         };
@@ -262,10 +354,10 @@ function uahTempTimeSeries() {
         var traceSoExt = {
             type: "scatter",
             mode: "lines",
-            name: 'Southern Extremes Avg Temp',
+            name: 'SH Extratropical (90°S–20°S)',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'SoExt'),
-            visible: 'legendonly',
+            visible: displayPlotLine('sxa', false) ? true : 'legendonly',
             line: {color: '#d99d00'}
             // line: {color: 'salmon'}
         };
@@ -273,10 +365,10 @@ function uahTempTimeSeries() {
         var traceNoPol = {
             type: "scatter",
             mode: "lines",
-            name: 'North Polar Avg Temp',
+            name: 'Northern Polar (60°N–90°N)',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'NoPol'),
-            visible: 'legendonly',
+            visible: displayPlotLine('npa', false) ? true : 'legendonly',
             line: {color: '#0087d9'}
             // line: {color: 'salmon'}
         };
@@ -284,10 +376,10 @@ function uahTempTimeSeries() {
         var traceSoPol = {
             type: "scatter",
             mode: "lines",
-            name: 'South Polar Avg Temp',
+            name: 'Southern Polar (90°S–60°S)',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'SoPol'),
-            visible: 'legendonly',
+            visible: displayPlotLine('spa', false) ? true : 'legendonly',
             line: {color: '#00e0eb'}
             // line: {color: 'salmon'}
         };
@@ -295,10 +387,10 @@ function uahTempTimeSeries() {
         var traceUSA48 = {
             type: "scatter",
             mode: "lines",
-            name: 'USA Lower 48 Avg Temp',
+            name: 'USA Lower 48',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'USA48'),
-            visible: 'legendonly',
+            visible: displayPlotLine('us48', false) ? true : 'legendonly',
             line: {color: '#0008eb'}
             // line: {color: 'salmon'}
         };
@@ -306,10 +398,10 @@ function uahTempTimeSeries() {
         var traceUSA49 = {
             type: "scatter",
             mode: "lines",
-            name: 'USA 49 States Avg Temp',
+            name: 'USA Lower 48 + Alaska',
             x: unpack(rows, 'Year'),
             y: unpack(rows, 'USA49'),
-            visible: 'legendonly',
+            visible: displayPlotLine('us49', false) ? true : 'legendonly',
             line: {color: '#eb6600'}
             // line: {color: 'salmon'}
         };
