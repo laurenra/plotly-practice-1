@@ -199,15 +199,14 @@ function uahTempTimeSeries() {
             return rows.map(function(row) { return row[key]; });
         }
 
-        var config = {
-            toImageButtonOptions: {
-                format: 'svg', // one of png, svg, jpeg, webp
-                filename: 'custom_image',
-                height: 500,
-                width: 1300,
-                scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
-            }
-        };
+        var yearsArray = unpack(rows, 'Year');
+        var yaLen = yearsArray.length;
+        var yaFirst = yearsArray[0];
+        var yaLast = yearsArray[yaLen - 1];
+        var dateFirst = new Date(yaFirst);
+        var dateLast = new Date(yaLast);
+        // console("First date:" + dateFirst.)
+
 
         var traceGlobe = {
             type: "scatter",
@@ -413,6 +412,16 @@ function uahTempTimeSeries() {
 
         // var data = [trace1];
 
+        var config = {
+            toImageButtonOptions: {
+                format: 'svg', // one of png, svg, jpeg, webp
+                filename: 'custom_image',
+                height: 500,
+                width: 1300,
+                scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+            }
+        };
+
         var layout = {
             title: 'UAH Temperature Time Series',
             annotations: [{
@@ -439,6 +448,9 @@ function uahTempTimeSeries() {
         };
 
         Plotly.newPlot('uah-temp-time-series', data, layout, config);
+
+        var addData = [traceGlobeLand, traceGlobeOcean];
+        Plotly.addTraces('uah-temp-time-series', addData);
     })
 }
 
