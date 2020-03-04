@@ -1,3 +1,15 @@
+/**
+ * TODO: make a "Share Link" button that queries the DOM <g class="traces">
+ *     under <g class="groups"> under <g class="legend"> under the
+ *     <div id="uah-temp-time-series"> to get which ones are selected
+ *     (style="opacity: 1" instead of style="opacity: 0.5) and builds a URL
+ *     with query parameters.
+ * TODO: figure out how to create plots, legends, and matching URL query parameters
+ *     automatically from data headers.
+ * TODO: figure out how to use command line R to get UAH data, convert to a
+ *     time series (TS) to run statistical operations on it like decomposition,
+ *     linear trends, etc., then populate columns with smoothing, linear trends, etc.
+ */
 
 // var serverRoot = 'http://localhost:8888';
 // var serverRoot = 'http://yburbs.com/plotly-practice-1';
