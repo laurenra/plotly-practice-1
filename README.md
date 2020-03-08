@@ -12,6 +12,10 @@ Run Python simple HTTP server from root of project directory:
 
 (Linux/Mac)
 ```shell
+python3 -m http.server 8888
+```
+(Linux/Mac)
+```shell
 python -m SimpleHTTPServer 8888
 ```
 (Windows)
