@@ -7,7 +7,8 @@ tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/js/practice-1.
 tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/js/lib/plotly-latest.min.js
 
 tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/data/finance-charts-apple.csv
-tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/data/uahncdc_lt_6.0_monthly.csv
+#tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/data/uahncdc_lt_6.0_monthly.csv
+tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/data/uah-monthly.csv
 tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/data/noaa_battery_park_ny_meantrend-dates.csv
 
 # Return to the project directory
