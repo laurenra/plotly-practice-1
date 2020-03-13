@@ -24,6 +24,7 @@ python -m http.server 8888
 ```
 
 - Access the page in a browser at http://localhost:8888/practice-1.html.
+- Access the bubble maps page in a browser at http://localhost:8888/practice-2.html.
 - You can reference everything in the project local directory as
 subdirectories and files under localhost:8000.
 - Stop the server with Ctrl+C.
