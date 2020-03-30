@@ -204,7 +204,7 @@ function uahTempTimeSeries() {
     /* Get data and build plot(s). */
     // Plotly.d3.csv("http://localhost:8888/data/uah-monthly.csv", function(err, rows){
     // Plotly.d3.csv(serverRoot + "/data/uahncdc_lt_6.0_monthly.csv", function(err, rows){
-    Plotly.d3.csv(serverRoot + "/data/uah-monthly.csv", function(err, rows){
+    Plotly.d3.csv(serverRoot + "/data/uah-monthly-all.csv", function(err, rows){
     // Plotly.d3.dsv(" ", "http://localhost:8888/data/uah-monthly-date.txt", function(err, rows){
     // Plotly.d3.dsv("|", "http://localhost:8888/data/uah-monthly-date-delim.txt", function(err, rows){
 

@@ -1,35 +1,3 @@
-#### Get UAH data
-# 1. get from URL
-# 2. remove footer, keep data only
-# 3. create dataframe
-# 4. change column names
-# 5. create date column ("Date") from Year and Month, format as YYYY-MM-DD
-# 6. move Date to first column, requires moveme() function to be loaded, see below
-# 7. save as CSV
-# TODO: drop Year and Mo columns, move Date to 1st column, rename headers
-library("RCurl")
-uah.raw <- getURL("https://www.nsstc.uah.edu/data/msu/v6.0/tlt/uahncdc_lt_6.0.txt")
-uah.data <- substr(uah.raw, 1, regexpr("\n Year", uah.raw))
-rm(uah.raw)
-uah.monthly <- read.table(textConnection(uah.data), header = TRUE)
-rm(uah.data)
-names(uah.monthly) <- c("Year", "Month",
-                        "Global", "GLand", "GOcean",
-                        "NH", "NLand", "NOcean",
-                        "SH", "SLand", "SOcean",
-                        "Tropics", "TLand", "TOcean",
-                        "NExtTrpc", "NxLand", "NxOcean",
-                        "SExtTrpc", "SxLand", "SxOcean",
-                        "NoPolar", "NpLand", "NpOcean",
-                        "SoPolar", "SpLand", "SpOcean",
-                        "USA48", "USA49", "AUS")
-uah.monthly$Date <- as.Date(paste(uah.monthly$Year, uah.monthly$Month, 1, sep = "-"), "%Y-%m-%d")
-uah.monthly = subset(uah.monthly, select = -c(Year,Month))
-uah.rearranged.columns <- moveme(names(uah.monthly), "Date first")
-uah.monthly <- uah.monthly[, uah.rearranged.columns]
-rm(uah.rearranged.columns)
-write.csv(uah.monthly, file = "~/Development/R/uah-monthly.csv", row.names = FALSE)
-
 ## Function to move columns
 # see:
 # https://stackoverflow.com/questions/22286419/move-a-column-to-first-position-in-a-data-frame
@@ -77,3 +45,38 @@ moveme <- function (invec, movecommand) {
     }
     myVec
 }
+
+
+#### Get UAH data
+# 1. get from URL
+# 2. remove footer, keep data only
+# 3. create dataframe
+# 4. change column names
+# 5. create date column ("Date") from Year and Month, format as YYYY-MM-DD
+# 6. move Date to first column, requires moveme() function to be loaded, see below
+# 7. save as CSV
+# TODO: drop Year and Mo columns, move Date to 1st column, rename headers
+library("RCurl")
+uah.raw <- getURL("https://www.nsstc.uah.edu/data/msu/v6.0/tlt/uahncdc_lt_6.0.txt")
+uah.data <- substr(uah.raw, 1, regexpr("\n Year", uah.raw))
+rm(uah.raw)
+uah.monthly <- read.table(textConnection(uah.data), header = TRUE)
+rm(uah.data)
+names(uah.monthly) <- c("Year", "Month",
+"Global", "GLand", "GOcean",
+"NH", "NLand", "NOcean",
+"SH", "SLand", "SOcean",
+"Tropics", "TLand", "TOcean",
+"NExtTrpc", "NxLand", "NxOcean",
+"SExtTrpc", "SxLand", "SxOcean",
+"NoPolar", "NpLand", "NpOcean",
+"SoPolar", "SpLand", "SpOcean",
+"USA48", "USA49", "AUS")
+# Concatenate the Year and Month columns into a Date column (Y-m-d), with the day being the 1st of the month.
+uah.monthly$Date <- as.Date(paste(uah.monthly$Year, uah.monthly$Month, 1, sep = "-"), "%Y-%m-%d")
+# Delete the Year and Month columns
+uah.monthly = subset(uah.monthly, select = -c(Year,Month))
+uah.rearranged.columns <- moveme(names(uah.monthly), "Date first")
+uah.monthly <- uah.monthly[, uah.rearranged.columns]
+rm(uah.rearranged.columns)
+write.csv(uah.monthly, file = "~/Development/R/uah-monthly-all.csv", row.names = FALSE)
