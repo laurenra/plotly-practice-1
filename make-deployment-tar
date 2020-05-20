@@ -1,13 +1,16 @@
 echo "Save files to deploy in plotly-practice-1.tar."
 # Start from parent directory to include the plotly-practice-1 directory in the tarball
 cd ..
+# First file is cvf, all others are rvf
 tar cvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/practice-1.html
 
-tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/js/practice-1.js
-tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/js/lib/plotly-latest.min.js
+tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/practice-2.html
 
-tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/data/finance-charts-apple.csv
-tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/data/uahncdc_lt_6.0_monthly.csv
+tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/js/practice-1.js
+tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/js/practice-2.js
+# tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/js/lib/plotly-latest.min.js
+
+tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/data/uah-monthly-all.csv
 tar rvf plotly-practice-1/plotly-practice-1.tar plotly-practice-1/data/noaa_battery_park_ny_meantrend-dates.csv
 
 # Return to the project directory

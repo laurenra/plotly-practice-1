@@ -209,7 +209,8 @@ function uahTempTimeSeries() {
 
     /* Get data and build plot(s). */
     // Plotly.d3.csv("http://localhost:8888/data/uah-monthly.csv", function(err, rows){
-    Plotly.d3.csv(serverRoot + "/data/uahncdc_lt_6.0_monthly.csv", function(err, rows){
+    // Plotly.d3.csv(serverRoot + "/data/uahncdc_lt_6.0_monthly.csv", function(err, rows){
+    Plotly.d3.csv(serverRoot + "/data/uah-monthly-all.csv", function(err, rows){
     // Plotly.d3.dsv(" ", "http://localhost:8888/data/uah-monthly-date.txt", function(err, rows){
     // Plotly.d3.dsv("|", "http://localhost:8888/data/uah-monthly-date-delim.txt", function(err, rows){
 
@@ -217,7 +218,7 @@ function uahTempTimeSeries() {
             return rows.map(function(row) { return row[key]; });
         }
 
-        var yearsArray = unpack(rows, 'Year');
+        var yearsArray = unpack(rows, 'Date');
         var yaLen = yearsArray.length;
         var yaFirst = yearsArray[0];
         var yaLast = yearsArray[yaLen - 1];
@@ -226,12 +227,12 @@ function uahTempTimeSeries() {
         // console("First date:" + dateFirst.)
 
 
-        var traceGlobe = {
+        var traceGlobal = {
             type: "scatter",
             mode: "lines",
             name: 'Global Average',
-            x: unpack(rows, 'Year'),
-            y: unpack(rows, 'Globe'),
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'Global'),
             visible: displayPlotLine('ga', true) ? true : 'legendonly',
             // visible: urlParms.get('gAll') ?
             // line: {color: '#008000'}
@@ -240,12 +241,12 @@ function uahTempTimeSeries() {
         };
 
 
-        // var traceGlobe = {
+        // var traceGlobal = {
         //     type: "scatter",
         //     mode: "lines",
         //     fill: 'tozeroy',
         //     name: 'Global Avg Temp',
-        //     x: unpack(rows, 'Year'),
+        //     x: unpack(rows, 'Date'),
         //     y: unpack(rows, 'Globe'),
         //
         //     // line: {color: '#008000'}
@@ -259,26 +260,26 @@ function uahTempTimeSeries() {
         //     // fill: 'tonexty',
         //     fill: 'tozeroy',
         //     name: 'NH Land Avg Temp',
-        //     x: unpack(rows, 'Year'),
+        //     x: unpack(rows, 'Date'),
         //     y: unpack(rows, 'NLand'),
         //     line: {color: '#aa7100'}
         // };
 
-        var traceGlobeLand = {
+        var traceGLand = {
             type: "scatter",
             mode: "lines",
             name: 'Global Land Only',
-            x: unpack(rows, 'Year'),
+            x: unpack(rows, 'Date'),
             y: unpack(rows, 'GLand'),
             visible: displayPlotLine('gl', false) ? true : 'legendonly',
             line: {color: '#af6700'}
         };
 
-        var traceGlobeOcean = {
+        var traceGOcean = {
             type: "scatter",
             mode: "lines",
             name: 'Global Ocean Only',
-            x: unpack(rows, 'Year'),
+            x: unpack(rows, 'Date'),
             y: unpack(rows, 'GOcean'),
             visible: displayPlotLine('go', false) ? true : 'legendonly',
             line: {color: '#0083e0'}
@@ -288,7 +289,7 @@ function uahTempTimeSeries() {
             type: "scatter",
             mode: "lines",
             name: 'Northern Hemisphere',
-            x: unpack(rows, 'Year'),
+            x: unpack(rows, 'Date'),
             y: unpack(rows, 'NH'),
             // showlegend: false,
             // visible: false,
@@ -300,7 +301,7 @@ function uahTempTimeSeries() {
             type: "scatter",
             mode: "lines",
             name: 'NH Land Only',
-            x: unpack(rows, 'Year'),
+            x: unpack(rows, 'Date'),
             y: unpack(rows, 'NLand'),
             visible: displayPlotLine('nl', false) ? true : 'legendonly',
             line: {color: '#aa7100'}
@@ -310,7 +311,7 @@ function uahTempTimeSeries() {
             type: "scatter",
             mode: "lines",
             name: 'NH Ocean Only',
-            x: unpack(rows, 'Year'),
+            x: unpack(rows, 'Date'),
             y: unpack(rows, 'NOcean'),
             visible: displayPlotLine('no', false) ? true : 'legendonly',
             line: {color: '#00a6aa'}
@@ -320,7 +321,7 @@ function uahTempTimeSeries() {
             type: "scatter",
             mode: "lines",
             name: 'Southern Hemisphere',
-            x: unpack(rows, 'Year'),
+            x: unpack(rows, 'Date'),
             y: unpack(rows, 'SH'),
             visible: displayPlotLine('sa', false) ? true : 'legendonly',
             line: {color: '#3bee00'}
@@ -330,7 +331,7 @@ function uahTempTimeSeries() {
             type: "scatter",
             mode: "lines",
             name: 'SH Land Only',
-            x: unpack(rows, 'Year'),
+            x: unpack(rows, 'Date'),
             y: unpack(rows, 'SLand'),
             visible: displayPlotLine('sl', false) ? true : 'legendonly',
             line: {color: '#cb8c00'}
@@ -340,63 +341,173 @@ function uahTempTimeSeries() {
             type: "scatter",
             mode: "lines",
             name: 'SH Ocean Only',
-            x: unpack(rows, 'Year'),
+            x: unpack(rows, 'Date'),
             y: unpack(rows, 'SOcean'),
             visible: displayPlotLine('so', false) ? true : 'legendonly',
             line: {color: '#00d0d0'}
         };
 
-        var traceTrpcs = {
+        var traceTropics = {
             type: "scatter",
             mode: "lines",
             name: 'Tropics (20°S–20°N)',
-            x: unpack(rows, 'Year'),
-            y: unpack(rows, 'Trpcs'),
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'Tropics'),
             visible: displayPlotLine('ta', false) ? true : 'legendonly',
             line: {color: '#d90000'}
             // line: {color: 'salmon'}
         };
 
-        var traceNoExt = {
+        var traceTLand = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Tropics Land Only (20°S–20°N)',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'TLand'),
+            visible: displayPlotLine('tl', false) ? true : 'legendonly',
+            line: {color: '#d90000'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceTOcean = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Tropics Ocean Only (20°S–20°N)',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'TOcean'),
+            visible: displayPlotLine('to', false) ? true : 'legendonly',
+            line: {color: '#d90000'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceNExtTropic = {
             type: "scatter",
             mode: "lines",
             name: 'NH Extratropical (20°N–90°N)',
-            x: unpack(rows, 'Year'),
-            y: unpack(rows, 'NoExt'),
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'NExtTrpc'),
             visible: displayPlotLine('nxa', false) ? true : 'legendonly',
             line: {color: '#c200d9'}
             // line: {color: 'salmon'}
         };
 
-        var traceSoExt = {
+        var traceNxLand = {
+            type: "scatter",
+            mode: "lines",
+            name: 'NH Extratropical Land (20°N–90°N)',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'NxLand'),
+            visible: displayPlotLine('nxl', false) ? true : 'legendonly',
+            line: {color: '#c200d9'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceNxOcean = {
+            type: "scatter",
+            mode: "lines",
+            name: 'NH Extratropical Ocean (20°N–90°N)',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'NxOcean'),
+            visible: displayPlotLine('nxo', false) ? true : 'legendonly',
+            line: {color: '#c200d9'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceSExtTropic = {
             type: "scatter",
             mode: "lines",
             name: 'SH Extratropical (90°S–20°S)',
-            x: unpack(rows, 'Year'),
-            y: unpack(rows, 'SoExt'),
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SExtTrpc'),
             visible: displayPlotLine('sxa', false) ? true : 'legendonly',
             line: {color: '#d99d00'}
             // line: {color: 'salmon'}
         };
 
-        var traceNoPol = {
+        var traceSxLand = {
+            type: "scatter",
+            mode: "lines",
+            name: 'SH Extratropical Land (90°S–20°S)',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SxLand'),
+            visible: displayPlotLine('sxl', false) ? true : 'legendonly',
+            line: {color: '#d99d00'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceSxOcean = {
+            type: "scatter",
+            mode: "lines",
+            name: 'SH Extratropical Ocean (90°S–20°S)',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SxOcean'),
+            visible: displayPlotLine('sxo', false) ? true : 'legendonly',
+            line: {color: '#d99d00'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceNoPolar = {
             type: "scatter",
             mode: "lines",
             name: 'Northern Polar (60°N–90°N)',
-            x: unpack(rows, 'Year'),
-            y: unpack(rows, 'NoPol'),
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'NoPolar'),
             visible: displayPlotLine('npa', false) ? true : 'legendonly',
             line: {color: '#0087d9'}
             // line: {color: 'salmon'}
         };
 
-        var traceSoPol = {
+        var traceNpLand = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Northern Polar Land (60°N–90°N)',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'NpLand'),
+            visible: displayPlotLine('npl', false) ? true : 'legendonly',
+            line: {color: '#0087d9'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceNpOcean = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Northern Polar Ocean (60°N–90°N)',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'NpOcean'),
+            visible: displayPlotLine('npo', false) ? true : 'legendonly',
+            line: {color: '#0087d9'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceSoPolar = {
             type: "scatter",
             mode: "lines",
             name: 'Southern Polar (90°S–60°S)',
-            x: unpack(rows, 'Year'),
-            y: unpack(rows, 'SoPol'),
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SoPolar'),
             visible: displayPlotLine('spa', false) ? true : 'legendonly',
+            line: {color: '#00e0eb'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceSpLand = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Southern Polar Land (90°S–60°S)',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SpLand'),
+            visible: displayPlotLine('spl', false) ? true : 'legendonly',
+            line: {color: '#00e0eb'}
+            // line: {color: 'salmon'}
+        };
+
+        var traceSpOcean = {
+            type: "scatter",
+            mode: "lines",
+            name: 'Southern Polar Ocean (90°S–60°S)',
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SpOcean'),
+            visible: displayPlotLine('spo', false) ? true : 'legendonly',
             line: {color: '#00e0eb'}
             // line: {color: 'salmon'}
         };
@@ -405,7 +516,7 @@ function uahTempTimeSeries() {
             type: "scatter",
             mode: "lines",
             name: 'USA Lower 48',
-            x: unpack(rows, 'Year'),
+            x: unpack(rows, 'Date'),
             y: unpack(rows, 'USA48'),
             visible: displayPlotLine('us48', false) ? true : 'legendonly',
             line: {color: '#0008eb'}
@@ -416,17 +527,26 @@ function uahTempTimeSeries() {
             type: "scatter",
             mode: "lines",
             name: 'USA Lower 48 + Alaska',
-            x: unpack(rows, 'Year'),
+            x: unpack(rows, 'Date'),
             y: unpack(rows, 'USA49'),
             visible: displayPlotLine('us49', false) ? true : 'legendonly',
             line: {color: '#eb6600'}
             // line: {color: 'salmon'}
         };
 
-        // var data = [traceGlobe,traceNLand];
-        // var data = [traceGlobe,traceNH,traceSH,traceTrpcs];
-        var data = [traceGlobe,traceNH,traceSH,traceTrpcs,traceNoExt,traceSoExt,traceNoPol,traceSoPol,traceUSA48,traceUSA49];
-        // var data = [traceGlobe,traceGlobeLand,traceGlobeOcean,traceNH,traceNLand,traceNOcean,traceSH,traceSLand,traceSOcean];
+        // var data = [traceGlobal,traceNLand];
+        // var data = [traceGlobal,traceNH,traceSH,traceTropics];
+        // var data = [traceGlobal,traceNH,traceSH,traceTrpcs,traceNExtTropic,traceSExtTropic,traceNoPol,traceSoPol,traceUSA48,traceUSA49];
+        // var data = [traceGlobal,traceGLand,traceGOcean,traceNH,traceNLand,traceNOcean,traceSH,traceSLand,traceSOcean];
+        var data = [traceGlobal,traceGLand,traceGOcean,
+            traceNH,traceNLand,traceNOcean,
+            traceSH,traceSLand,traceSOcean,
+            traceTropics,traceTLand,traceTOcean,
+            traceNExtTropic,traceNxLand,traceNxOcean,
+            traceSExtTropic,traceSxLand,traceSxOcean,
+            traceNoPolar,traceNpLand,traceNpOcean,
+            traceSoPolar,traceSpLand,traceSpOcean,
+            traceUSA48,traceUSA49];
 
         // var data = [trace1];
 
@@ -457,7 +577,7 @@ function uahTempTimeSeries() {
             }],
             xaxis: {
                 // title: 'Year (December 1978&ndash;present)'
-                title: 'Year'
+                title: 'Date'
                 // title: 'Year (December 1978&#x2013;present)'
             },
             yaxis: {
@@ -467,8 +587,8 @@ function uahTempTimeSeries() {
 
         Plotly.newPlot('uah-temp-time-series', data, layout, config);
 
-        var addData = [traceGlobeLand, traceGlobeOcean];
-        Plotly.addTraces('uah-temp-time-series', addData);
+        // var addData = [traceGLand, traceGOcean];
+        // Plotly.addTraces('uah-temp-time-series', addData);
     })
 }
 
