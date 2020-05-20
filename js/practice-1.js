@@ -160,12 +160,15 @@ function displayPlotLine( urlParm = '', defaultDisplay = true) {
 /**
  * url query parameters show/hide plot lines
  *
+ * Example: http://localhost:8000/practice-1.html?ga=0&ta&na
+ * Turn off Global All, display Tropics All and Northern hemisphere All
+ *
  * ga, gl, go = global All, Land, Oceans
  * na, nl, no = northern hemisphere All, Land, Oceans
  * sa, sl, so = southern hemisphere All, Land, Oceans
  * ta, tl, to = tropics All, Land, Oceans
  * nxa, nxl, nxo = northern extratropical All, Land, Oceans
- * sxa, sxl, sxo = northern extratropical All, Land, Oceans
+ * sxa, sxl, sxo = southern extratropical All, Land, Oceans
  * npa, npl, npo = northern polar All, Land, Oceans
  * spa, spl, spo = southern polar All, Land, Oceans
  * us48, us49, aus = US lower 48, US 48 + Alaska, Australia?
@@ -181,21 +184,24 @@ function displayPlotLine( urlParm = '', defaultDisplay = true) {
  *  SoPol = Southern Polar
  *  USA48 = USA lower-48
  *  USA49 = USA lower-48 + Alaska
+ *
  */
 function uahTempTimeSeries() {
 
     /**
      * Global temp
      * no param: visible = true
-     * gAll:     visible = true
-     * gAll=0:   visible = 'legendonly'
-     * gAll=1:   visible = true
+     * ga:       visible = true
+     * ga=0:     visible = 'legendonly'
+     * ga=1:     visible = true
      *
      * Tropics (and all others)
      * no param: visible = 'legendonly'
-     * tAll:     visible = true
-     * tAll=0:   visible = 'legendonly'
-     * tAll=1:   visible = true
+     * ta:       visible = true
+     * ta=0:     visible = 'legendonly'
+     * ta=1:     visible = true
+     *
+     * Query param example
      */
 
     // var gAllDisplay = displayPlotLine('gAll', true);
