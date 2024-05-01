@@ -36,8 +36,43 @@ python3 -m http.server 8888
 - You can reference everything in the project local directory as subdirectories and 
 files under localhost:8000.
 - Stop the server with Ctrl+C.
-- If your changes don't appear, force the browser to refresh from the server. In Chrome,
-use Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac). 
+- If your changes don't appear, force the browser to refresh from the server. In 
+Chrome, use Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac).
+
+## UAH Temperature Time Series Plot Notes
+
+- You can click on the legend on the right to display or hide specific plots, like 
+the Southern Hemisphere temperature plot.
+- You can load the page with specific plots displayed by using URL queries. For 
+example, try:
+
+```shell
+http://localhost:8000/practice-1.html?ga=0&ta&na
+```
+
+This turns off the Global Average plot and displays Tropics (All) and Northern 
+Hemisphere (All) plots. The query parameters are described in the comments for 
+the uahTempTimeSeries() function.
+
+### URL query parameters to show/hide plots
+
+Example: http://localhost:8000/practice-1.html?ga=0&ta&na
+
+- **ga=0** turns off Global (All), which is displayed by default
+- **ta** shows Tropics (All)
+- **na** shows Northern Hemisphere (All)
+
+#### Valid Plot Name Parameters
+
+- ga, gl, go = global All, Land, Oceans
+- na, nl, no = northern hemisphere All, Land, Oceans
+- sa, sl, so = southern hemisphere All, Land, Oceans
+- ta, tl, to = tropics All, Land, Oceans
+- nxa, nxl, nxo = northern extratropical All, Land, Oceans
+- sxa, sxl, sxo = southern extratropical All, Land, Oceans
+- npa, npl, npo = northern polar All, Land, Oceans
+- spa, spl, spo = southern polar All, Land, Oceans
+- us48, us49, aus = US lower 48, US 48 + Alaska, Australia?
 
 ## Update the data source .csv files with R scripts
 The **noaa_battery_park_ny_meantrend-dates.csv** and **uah-monthly-all.csv** used 
