@@ -1,4 +1,4 @@
-# Plotly Practice 1 junk
+# Plotly Practice 1
 
 Practice using Plotly JS to graph data.
 
