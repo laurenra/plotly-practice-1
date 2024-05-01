@@ -28,7 +28,7 @@ will show a directory listing. You can click on the .html files to show them.
 If you want a different port, like 8888, just add the port number to the command 
 like this:
 
-(Linux/Mac)
+Linux/Mac python3
 ```shell
 python3 -m http.server 8888
 ```
