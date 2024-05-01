@@ -47,7 +47,7 @@ moveme <- function (invec, movecommand) {
 }
 
 
-#### Get UAH data
+#### Get Battery Park, NY sea level data
 # 1. get from URL
 # 2. remove footer, keep data only
 # 3. create dataframe
@@ -58,28 +58,23 @@ moveme <- function (invec, movecommand) {
 # TODO: drop Year and Mo columns, move Date to 1st column, rename headers
 install.packages("RCurl")
 library("RCurl")
-uah.raw <- getURL("https://www.nsstc.uah.edu/data/msu/v6.0/tlt/uahncdc_lt_6.0.txt")
-uah.data <- substr(uah.raw, 1, regexpr("\n Year", uah.raw))
-rm(uah.raw)
-uah.monthly <- read.table(textConnection(uah.data), header = TRUE)
-rm(uah.data)
-names(uah.monthly) <- c("Year", "Month",
-"Global", "GLand", "GOcean",
-"NH", "NLand", "NOcean",
-"SH", "SLand", "SOcean",
-"Tropics", "TLand", "TOcean",
-"NExtTrpc", "NxLand", "NxOcean",
-"SExtTrpc", "SxLand", "SxOcean",
-"NoPolar", "NpLand", "NpOcean",
-"SoPolar", "SpLand", "SpOcean",
-"USA48", "USA49", "AUS")
+sealevel.raw <- getURL("https://tidesandcurrents.noaa.gov/sltrends/data/8518750_meantrend.txt")
+sealevel.nodescr <- substr(sealevel.raw, regexpr("\n\n", sealevel.raw), nchar(sealevel.raw))
+sealevel.data <- substr(sealevel.nodescr, 3, nchar(sealevel.raw))
+rm(sealevel.raw)
+rm(sealevel.nodescr)
+sealevel.monthly <- read.table(textConnection(sealevel.data), header = TRUE)
+rm(sealevel.data)
+names(sealevel.monthly) <- c("Year", "Month",
+"Monthly_MSL", "Linear_Trend", "High_Conf","Low_Conf")
 # Concatenate the Year and Month columns into a Date column (Y-m-d), with the day being the 1st of the month.
-uah.monthly$Date <- as.Date(paste(uah.monthly$Year, uah.monthly$Month, 1, sep = "-"), "%Y-%m-%d")
+sealevel.monthly$Date <- as.Date(paste(sealevel.monthly$Year, sealevel.monthly$Month, 1, sep = "-"), "%Y-%m-%d")
 # Delete the Year and Month columns
-uah.monthly = subset(uah.monthly, select = -c(Year,Month))
-uah.rearranged.columns <- moveme(names(uah.monthly), "Date first")
-uah.monthly <- uah.monthly[, uah.rearranged.columns]
-rm(uah.rearranged.columns)
+sealevel.monthly = subset(sealevel.monthly, select = -c(Year,Month))
+sealevel.rearranged.columns <- moveme(names(sealevel.monthly), "Date first")
+sealevel.monthly <- sealevel.monthly[, sealevel.rearranged.columns]
+rm(sealevel.rearranged.columns)
+names(sealevel.monthly) <- c("Year", "Monthly_MSL", "Linear_Trend", "High_Conf","Low_Conf")
 # write.csv(uah.monthly, file = "~/Development/R/uah-monthly-all.csv", row.names = FALSE)
-write.csv(uah.monthly, file = "~/Dev/Node/plotly-practice-1/uah-monthly-all.csv", row.names = FALSE)
+write.csv(sealevel.monthly, file = "~/Dev/Node/plotly-practice-1/noaa_battery_park_ny_meantrend-dates.csv", row.names = FALSE)
 

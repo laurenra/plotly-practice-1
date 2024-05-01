@@ -599,6 +599,7 @@ function noaaBatteryParkTimeSeries() {
     // Plotly.d3.csv("https://tidesandcurrents.noaa.gov/sltrends/data/8518750_meantrend.csv", function(err, rows){
     // Plotly.d3.csv("http://localhost:8888/data/noaa_battery_park_ny_meantrend.csv", function(err, rows){
     // Plotly.d3.csv("http://localhost:8888/data/noaa_battery_park_ny_meantrend-dates.csv", function(err, rows){
+    // Plotly.d3.csv(serverRoot + "/data/noaa_battery_park_ny_meantrend-dates-old.csv", function(err, rows){
     Plotly.d3.csv(serverRoot + "/data/noaa_battery_park_ny_meantrend-dates.csv", function(err, rows){
     // Plotly.d3.dsv(" ", "http://localhost:8888/data/uah-monthly-date.txt", function(err, rows){
     // Plotly.d3.dsv("|", "http://localhost:8888/data/uah-monthly-date-delim.txt", function(err, rows){
