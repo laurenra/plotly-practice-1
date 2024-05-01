@@ -1,4 +1,4 @@
-# Plotly Practice 1 test commit
+# Plotly Practice 1
 
 Practice using Plotly JS to graph data.
 
