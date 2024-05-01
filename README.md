@@ -22,9 +22,10 @@ Windows python
 ```shell
 python -m http.server
 ```
-The default port is 8000 so view it by going to localhost:8000 in a browser which will 
-show a directory listing. You can click on the .html files to show them. If you 
-want a different port, like 8888, just add the port number to the command like this:
+The default port is 8000. View it by going to localhost:8000 in a browser, which 
+will show a directory listing. You can click on the .html files to show them. 
+If you want a different port, like 8888, just add the port number to the command 
+like this:
 
 (Linux/Mac)
 ```shell
@@ -75,14 +76,15 @@ Example: http://localhost:8000/practice-1.html?ga=0&ta&na
 - us48, us49, aus = US lower 48, US 48 + Alaska, Australia?
 
 ## Update the data source .csv files with R scripts
-The **noaa_battery_park_ny_meantrend-dates.csv** and **uah-monthly-all.csv** used 
-by the Plotly Javascript library to generate plots pull data from the NOAA and UAH 
-websites. To get the latest data, use the .R scripts in the /r directory.
+The **noaa_battery_park_ny_meantrend-dates.csv** and **uah-monthly-all.csv** 
+used by the Plotly Javascript library to generate plots pull data from the NOAA
+and UAH websites. To get the latest data, use the .R scripts in the /r directory.
 
 1. Install R from https://cran.rstudio.com/
 2. Install RStudio from https://posit.co/download/rstudio-desktop/
 
-You could use an R command line to run the scripts but RStudio is far more convenient.
+You could use an R command console to run the scripts but RStudio is far more 
+convenient.
 
 In RStudio:
 
