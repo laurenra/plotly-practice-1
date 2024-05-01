@@ -4,7 +4,8 @@ Practice using Plotly JS to graph data.
 
 Note: **plotly-latest.min.js** is loaded from a CDN. It's fairly large, about 3.5 MB, 
 so you could download it to the **js/lib** directory for development, if you want.
-Just modify the `<script>` tag in the HTML files. The source is https://cdn.plot.ly/plotly-latest.min.js.
+Just modify the `<script>` tag in the HTML files. The source is 
+https://cdn.plot.ly/plotly-latest.min.js.
 
 ## Run it
 
@@ -22,7 +23,7 @@ Windows python
 ```shell
 python -m http.server
 ```
-The default port is 8000. View it by going to localhost:8000 in a browser, which 
+The default port is 8000. View it by going to [localhost:8000](http://localhost:8000) in a browser, which 
 will show a directory listing. You can click on the .html files to show them. 
 If you want a different port, like 8888, just add the port number to the command 
 like this:
@@ -34,18 +35,18 @@ python3 -m http.server 8888
 
 - Access the page directly in a browser at http://localhost:8000/practice-1.html.
 - Access the bubble maps page directly in a browser at http://localhost:8000/practice-2.html.
-- You can reference everything in the project local directory as subdirectories and 
-files under localhost:8000.
+- You can reference everything in the project local directory as subdirectories 
+and files under http://localhost:8000.
 - Stop the server with Ctrl+C.
-- If your changes don't appear, force the browser to refresh from the server. In 
-Chrome, use Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac).
+- If your changes don't appear, force the browser to refresh from the server. 
+In Chrome, use Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac).
 
 ## UAH Temperature Time Series Plot Notes
 
-- You can click on the legend on the right to display or hide specific plots, like 
-the Southern Hemisphere temperature plot.
-- You can load the page with specific plots displayed by using URL queries. For 
-example, try:
+- You can click on the legend on the right to display or hide specific plots, 
+like the Southern Hemisphere temperature plot.
+- You can load the page with specific plots displayed by using URL queries. 
+For example, try:
 
 ```shell
 http://localhost:8000/practice-1.html?ga=0&ta&na
