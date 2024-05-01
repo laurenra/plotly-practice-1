@@ -2,10 +2,10 @@
 
 Practice using Plotly JS to graph data.
 
-Note: **plotly-latest.min.js** is loaded from a CDN. It's fairly large, about 3.5 MB, 
-so you could download it to the **js/lib** directory for development, if you want.
-Just modify the `<script>` tag in the HTML files. The source is 
-https://cdn.plot.ly/plotly-latest.min.js.
+Note: **plotly-latest.min.js** is loaded from a CDN. It's fairly large, about 
+3.5 MB. You could download it to the **js/lib** directory for faster loading 
+for development, if you want. Modify the `<script>` tag in the HTML files. 
+The source is https://cdn.plot.ly/plotly-latest.min.js.
 
 ## Run it
 
